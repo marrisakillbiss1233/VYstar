@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VyStar Login </title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+.main-content{
+    flex:1;
+}
+
+/* Top Logo */
+.logo-area{
+    text-align:center;
+    padding-top:12px;
+}
+
+.logo-area img{
+    width:150px;
+}
+
+/* Login Card */
+.login-container{
+    width:315px;
+    background:#fff;
+    margin:20px auto 0;
+    border:1px solid #d8d8d8;
+    border-radius:3px;
+    box-shadow:0 1px 4px rgba(0,0,0,.12);
+}
+
+.login-header{
+    padding:16px;
+    border-bottom:1px solid #e5e5e5;
+    font-size:14px;
+    font-weight:600;
+}
+
+.form-body{
+    padding:14px;
+}
+
+.form-body label{
+    display:block;
+    font-size:11px;
+    color:#555;
+    margin-bottom:6px;
+}
+
+.form-body input[type="text"],
+.form-body input[type="password"]{
+    width:100%;
+    height:32px;
+    border:1px solid #d9d9d9;
+    border-radius:2px;
+    padding:0 10px;
+    margin-bottom:16px;
+    outline:none;
+}
+
+.password-wrapper{
+    position:relative;
+}
+
+.password-wrapper i{
+    position:absolute;
+    right:12px;
+    top:9px;
+    color:#2f6de1;
+    font-size:13px;
+    cursor:pointer;
+}
+
+.remember{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+}
+
+.remember input{
+    width:16px;
+    height:16px;
+}
+
+.remember span{
+    font-size:13px;
+}
+
+.login-btn{
+    width:255px;
+    height:33px;
+    display:block;
+    margin:auto;
+    border:none;
+    border-radius:20px;
+    background:#3673df;
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+    text-decoration:none;
+    text-align:center;
+    line-height:33px;
+}
+
+.link{
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    color:#2f6de1;
+    font-size:13px;
+    margin-top:18px;
+}
+
+.enroll{
+    margin-top:20px;
+}
+
+.error-message {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    margin-bottom: 15px;
+    text-align: center;
+    display: none;
+}
+
+/* Footer */
+.footer-top{
+    background:white;
+    border-top:1px solid #e5e5e5;
+    padding:24px 40px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:35px;
+    flex-wrap:wrap;
+    margin-top:55px;
+}
+
+.footer-logo{
+    font-size:42px;
+    color:#0f3c88;
+    font-weight:bold;
+}
+
+.footer-info{
+    font-size:11px;
+    line-height:18px;
+}
+
+.footer-info a{
+    color:#2f6de1;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.routing{
+    font-size:11px;
+}
+
+.badges{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.badge{
+    border:1px solid #ccc;
+    padding:8px 12px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.visa{
+    color:#1f4ba8;
+    font-size:12px;
+}
+
+.copyright{
+    background:white;
+    text-align:center;
+    font-size:11px;
+    padding-bottom:8px;
+}
+
+.footer-bottom{
+    background:#002f86;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 60px;
+}
+
+.footer-links{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.footer-links a{
+    color:white;
+    text-decoration:none;
+    font-size:11px;
+}
+
+.social-icons{
+    display:flex;
+    gap:16px;
+    font-size:18px;
+}
+
+.social-icons i{
+    cursor:pointer;
+}
+
+@media(max-width:768px){
+
+    .footer-bottom{
+        flex-direction:column;
+        gap:15px;
+        text-align:center;
+    }
+
+    .footer-top{
+        flex-direction:column;
+        text-align:center;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="main-content">
+
+    <!-- Logo -->
+    <div class="logo-area">
+        <!-- Replace with actual logo -->
+        <img src="https://www.wjct.org/wp-content/uploads/2021/10/VyStar-Logo-4c-NoTag.png"
+             alt="VyStar">
+    </div>
+
+    <!-- Login Box -->
+    <div class="login-container">
+
+        <div class="login-header">
+            User Login
+        </div>
+
+        <div class="form-body">
+
+            <div class="error-message" id="errorMessage">
+                Invalid username or password. Please try again.
+            </div>
+
+            <label>Username</label>
+            <input type="text" id="username">
+
+            <label>Password</label>
+
+            <div class="password-wrapper">
+                <input type="password" id="password">
+                <i class="fa-regular fa-eye" onclick="togglePassword()"></i>
+            </div>
+
+            <div class="remember">
+                <input type="checkbox" id="rememberCheckbox">
+                <span>Remember me</span>
+            </div>
+
+            <button class="login-btn" onclick="validateLogin()">Log In</button>
+
+            <a href="#" class="link">Can't Sign In?</a>
+
+            <a href="#" class="link enroll">
+                Enroll in Online Banking
+            </a>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer-top">
+
+    <div class="footer-logo">
+        VyStar
+    </div>
+
+    <div class="footer-info">
+        <div>VyStar Credit Union</div>
+        <div>P.O. Box 45085</div>
+        <div>Jacksonville FL 32232</div>
+    </div>
+
+    <div class="footer-info">
+        <a href="#">Contact Us</a>
+        <div>904-777-6000</div>
+        <div>800-445-6289</div>
+    </div>
+
+    <div class="footer-info">
+        <a href="#">Locations</a>
+        <div>Member support: Personal</div>
+        <div>Member support: Business</div>
+    </div>
+
+    <div class="routing">
+        Routing #263079276
+    </div>
+
+    <div class="badges">
+        <div class="visa">Verified by <strong>VISA</strong></div>
+    </div>
+
+</div>
+
+<div class="copyright">
+    © 2026 VyStar Credit Union
+</div>
+
+<div class="footer-bottom">
+
+    <div class="footer-links">
+        <a href="#">WORK WITH US</a>
+        <a href="#">DISCLOSURES</a>
+        <a href="#">PRIVACY</a>
+        <a href="#">SECURITY</a>
+        <a href="#">ACCESSIBILITY</a>
+        <a href="#">COBROWSE CODE</a>
+    </div>
+
+    <div class="social-icons">
+        <i class="fab fa-facebook-f"></i>
+        <i class="fab fa-instagram"></i>
+        <i class="fab fa-linkedin-in"></i>
+        <i class="fab fa-twitter"></i>
+        <i class="fab fa-youtube"></i>
+        <i class="fab fa-pinterest-p"></i>
+    </div>
+
+</div>
+
+<script>
+function togglePassword() {
+    const password = document.getElementById("password");
+
+    if(password.type === "password"){
+        password.type = "text";
+    } else {
+        password.type = "password";
+    }
+}
+
+function validateLogin() {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    const errorMessage = document.getElementById("errorMessage");
+    
+    // Check if username and password match the required values
+    if (username === "abcdefg" && password === "112233") {
+        // Redirect to the specified URL
+        window.location.href = "page 2.html";
+    } else {
+        // Show error message
+        errorMessage.style.display = "block";
+        
+        // Clear the password field for security
+        document.getElementById("password").value = "";
+        
+        // Optional: Clear the error message after 3 seconds
+        setTimeout(function() {
+            errorMessage.style.display = "none";
+        }, 3000);
+    }
+}
+
+// Add enter key functionality
+document.getElementById("password").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        validateLogin();
+    }
+});
+
+document.getElementById("username").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        validateLogin();
+    }
+});
+</script>
+
+</body>
+</html>

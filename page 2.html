@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checking Account Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    color:#222;
+}
+
+/* HEADER */
+
+header{
+    background:#fff;
+    border-bottom:1px solid #dce3eb;
+    height:74px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 40px;
+}
+
+.logo{
+    font-size:34px;
+    font-weight:700;
+    color:#003c7d;
+}
+
+.logo span{
+    display:block;
+    font-size:12px;
+    color:#666;
+    margin-top:-4px;
+    font-weight:500;
+}
+
+nav{
+    display:flex;
+    gap:35px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#2d3748;
+    font-size:14px;
+    font-weight:500;
+}
+
+.logout{
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+/* MAIN */
+
+.container{
+    max-width:1300px;
+    margin:40px auto;
+    padding:0 20px;
+}
+
+.greeting{
+    font-size:32px;
+    font-weight:600;
+    margin-bottom:30px;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+    display:grid;
+    grid-template-columns:1fr 360px;
+    gap:25px;
+}
+
+.card{
+    background:#fff;
+    border-radius:12px;
+    padding:30px;
+    box-shadow:
+    0 1px 2px rgba(0,0,0,.05),
+    0 8px 20px rgba(0,0,0,.04);
+}
+
+.section-title{
+    font-size:14px;
+    color:#6b7280;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.8px;
+    margin-bottom:20px;
+}
+
+.account-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 0;
+}
+
+.account-name{
+    font-size:18px;
+    font-weight:700;
+}
+
+.account-number{
+    color:#6b7280;
+    font-size:13px;
+    margin-top:5px;
+}
+
+.amount{
+    font-size:40px;
+    font-weight:300;
+    text-align:right;
+}
+
+.balance-label{
+    text-align:right;
+    font-size:13px;
+    color:#6b7280;
+}
+
+/* PROMO */
+
+.promo{
+    background:linear-gradient(135deg,#0047a8,#002868);
+    border-radius:12px;
+    padding:35px;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.promo h2{
+    font-size:28px;
+    line-height:1.4;
+    margin-bottom:25px;
+}
+
+.promo button{
+    width:150px;
+    border:none;
+    background:#ffd43b;
+    color:#111;
+    padding:12px 20px;
+    border-radius:8px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+/* DETAILS */
+
+.details{
+    margin-top:30px;
+    background:white;
+    border-radius:12px;
+    padding:30px;
+    box-shadow:
+    0 1px 2px rgba(0,0,0,.05),
+    0 8px 20px rgba(0,0,0,.04);
+}
+
+.details-title{
+    font-size:24px;
+    font-weight:700;
+    margin-bottom:30px;
+}
+
+.details-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr 320px;
+    gap:40px;
+}
+
+.info p{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid #edf2f7;
+    font-size:14px;
+}
+
+.info strong{
+    font-weight:600;
+}
+
+.balance-box{
+    text-align:center;
+}
+
+.balance-box h4{
+    font-size:13px;
+    color:#6b7280;
+    margin-bottom:10px;
+}
+
+.big-balance{
+    font-size:48px;
+    font-weight:300;
+    margin-bottom:30px;
+}
+
+.actions{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.actions a{
+    text-decoration:none;
+    color:#0055cc;
+    font-size:14px;
+    font-weight:500;
+}
+
+/* SEARCH */
+
+.search{
+    margin-top:35px;
+}
+
+.search input{
+    width:100%;
+    padding:15px;
+    border:1px solid #d6dde6;
+    border-radius:8px;
+    font-size:14px;
+}
+
+/* FOOTER */
+
+footer{
+    margin-top:40px;
+    background:#fff;
+    border-top:1px solid #dce3eb;
+}
+
+.footer-inner{
+    max-width:1300px;
+    margin:auto;
+    padding:30px;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.footer-logo{
+    font-size:36px;
+    font-weight:700;
+    color:#003c7d;
+}
+
+.footer-col{
+    color:#6b7280;
+    line-height:1.8;
+    font-size:14px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+    .dashboard{
+        grid-template-columns:1fr;
+    }
+
+    .details-grid{
+        grid-template-columns:1fr;
+    }
+
+    nav{
+        display:none;
+    }
+
+    header{
+        padding:0 20px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        VyStar
+        <span>Credit Union</span>
+    </div>
+
+    <nav>
+        <a href="#">Accounts</a>
+        <a href="#">Pay & Transfer</a>
+        <a href="#">Products & Offers</a>
+        <a href="#">Profile & Settings</a>
+    </nav>
+
+    <div class="logout">Logout</div>
+
+</header>
+
+<div class="container">
+
+    <div class="greeting">
+        Good Afternoon, James
+    </div>
+
+    <div class="dashboard">
+
+        <!-- CHECKING ACCOUNT ONLY -->
+
+        <div class="card">
+
+            <div class="section-title">
+                Checking Account
+            </div>
+
+            <div class="account-row">
+
+                <div>
+                    <div class="account-name">
+                        CHECKING
+                    </div>
+
+                    <div class="account-number">
+                        ****7383
+                    </div>
+                </div>
+
+                <div>
+                    <div class="amount">
+                        $12,754.97
+                    </div>
+
+                    <div class="balance-label">
+                        Available Balance
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- PROMOTION -->
+
+        <div class="promo">
+
+            <h2>
+                Earn rewards every day with your VyStar Checking Account.
+            </h2>
+
+            <button>
+                Learn More
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- CHECKING DETAILS -->
+
+    <div class="details">
+
+        <div class="details-title">
+            CHECKING ACCOUNT ****7383
+        </div>
+
+        <div class="details-grid">
+
+            <div class="info">
+
+                <p>
+                    <span>Account Number</span>
+                    <strong>****7383</strong>
+                </p>
+
+                <p>
+                    <span>Routing Number</span>
+                    <strong>263079276</strong>
+                </p>
+
+                <p>
+                    <span>Account Type</span>
+                    <strong>Checking</strong>
+                </p>
+
+                <p>
+                    <span>Pending Holds</span>
+                    <strong>$0.00</strong>
+                </p>
+
+            </div>
+
+            <div class="info">
+
+                <p>
+                    <span>Monthly Deposits</span>
+                    <strong>$4,250.00</strong>
+                </p>
+
+                <p>
+                    <span>Monthly Withdrawals</span>
+                    <strong>$1,840.00</strong>
+                </p>
+
+                <p>
+                    <span>Last Statement Date</span>
+                    <strong>06/01/2026</strong>
+                </p>
+
+            </div>
+
+            <div class="balance-box">
+
+                <h4>Current Balance</h4>
+
+                <div class="big-balance">
+                    $12,754.97
+                </div>
+
+                <h4>Available Balance</h4>
+
+                <div class="big-balance">
+                    $12,754.97
+                </div>
+
+                <div class="actions">
+                    <a href="#">Transfer Funds</a>
+                    <a href="#">Pay Bills</a>
+                    <a href="#">View Statements</a>
+                    <a href="#">Manage Account</a>
+                    <a href="#">Account Settings</a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="search">
+            <input
+                type="text"
+                placeholder="Search transactions, amount or date">
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+
+    <div class="footer-inner">
+
+        <div class="footer-logo">
+            VyStar
+        </div>
+
+        <div class="footer-col">
+            VyStar Credit Union<br>
+            P.O. Box 45085<br>
+            Jacksonville, FL 32232
+        </div>
+
+        <div class="footer-col">
+            Contact Us<br>
+            904-777-6000<br>
+            800-445-6289
+        </div>
+
+        <div class="footer-col">
+            Member Support Personal<br>
+            Member Support Business<br>
+            Routing #263079276
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+</html>
